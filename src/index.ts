@@ -13,7 +13,6 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
-// Инициализация базы данных
 AppDataSource.initialize()
   .then(() => console.log('Connected to SQLite via TypeORM'))
   .catch(err => console.error('Error during Data Source initialization', err));

@@ -6,7 +6,7 @@ import { Task } from './entity/Task';
 export const AppDataSource = new DataSource({
   type: 'sqlite',
   database: 'database.sqlite',
-  synchronize: true, // для разработки можно включить автоматическую синхронизацию
+  synchronize: true, // ok for local but not for prod
   logging: false,
   entities: [User, Task],
   migrations: [],
