@@ -20,6 +20,42 @@ const validate = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Task:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *         name:
+ *           type: string
+ *         complete:
+ *           type: boolean
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ */
+
+/**
+ * @swagger
+ * /tasks:
+ *   get:
+ *     summary: Получить все задачи
+ *     tags:
+ *       - Tasks
+ *     responses:
+ *       200:
+ *         description: Массив задач
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Task'
+ */
+
 router.get("/", async (req: Request, res: Response, next: NextFunction) => {
   try {
     const taskRepository = AppDataSource.getRepository(Task);
@@ -30,6 +66,34 @@ router.get("/", async (req: Request, res: Response, next: NextFunction) => {
   }
 });
 
+
+/**
+ * @swagger
+ * /tasks:
+ *   post:
+ *     summary: Создать новую задачу
+ *     tags:
+ *       - Tasks
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [name]
+ *             properties:
+ *               name:
+ *                 type: string
+ *               complete:
+ *                 type: boolean
+ *     responses:
+ *       201:
+ *         description: Созданный объект задачи
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Task'
+ */
 router.post(
   "/",
   [

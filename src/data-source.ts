@@ -5,7 +5,7 @@ import { Task } from "./entity/Task";
 
 export const AppDataSource = new DataSource({
   type: "sqlite",
-  database: "database.sqlite",
+  database: process.env.NODE_ENV === "test" ? ":memory:" : "database.sqlite",
   synchronize: true, // ok for local but not for prod
   logging: false,
   entities: [User, Task],
